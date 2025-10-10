@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center g-3 align-items-center">
+    <button>
+        Registrar Bitacora
+    </button>
+    <button>
+        Editar Bitacora
+    </button>
+</div>
+    <form class="form-text" action="/" method="post">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+
+                    <th class="w-auto">Turno</th>
+                    <th class="">Linea</th>
+                    <th class="w-25">TRWNumber</th>
+                    <th class="w-50">Componentes</th>
+                    <th class="w-25">Defecto</th>
+                    <th class="w-auto">Cantidad</th>
+                    <th class="w-auto">Boleta Folio</th>
+                </tr>
+            </thead>
+            <tbody>
+            @for (int row = 1; row <= 25; row++)
+                {
+                <tr>
+                    @for (int col = 1; col <= 7; col++)
+                    {
+                        <td>
+                            <input type="text" name="@($"cell_{row}")" class="form-control" />
+                        </td>                       
+                    }
+                </tr>
+                }
+        </tbody>
+        </table>
+    </form>
+

@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|c:\\users\\mxjofra\\onedrive - zf-lifetec\\desktop\\aspx\\scrapsystem\\scrapsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|solutionrelative:scrapsystem\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|c:\\users\\mxjofra\\onedrive - zf-lifetec\\desktop\\aspx\\scrapsystem\\scrapsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|solutionrelative:scrapsystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|c:\\users\\mxjofra\\onedrive - zf-lifetec\\desktop\\aspx\\scrapsystem\\scrapsystem\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|solutionrelative:scrapsystem\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|c:\\users\\mxjofra\\onedrive - zf-lifetec\\desktop\\aspx\\scrapsystem\\scrapsystem\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|solutionrelative:scrapsystem\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|c:\\users\\mxjofra\\onedrive - zf-lifetec\\desktop\\aspx\\scrapsystem\\scrapsystem\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8CA4BA2E-2451-43A3-BA15-1ED066EB74F9}|ScrapSystem\\ScrapSystem.csproj|solutionrelative:scrapsystem\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "ScrapSystem\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "ScrapSystem\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-10T21:05:56.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "ScrapSystem\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "ScrapSystem\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-10T21:05:53.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "ScrapSystem\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "ScrapSystem\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-10T21:05:43.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "ScrapSystem\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "ScrapSystem\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-10T21:05:27.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "ScrapSystem\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem\\Views\\Home\\Index.cshtml*",
+              "RelativeToolTip": "ScrapSystem\\Views\\Home\\Index.cshtml*",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAAAB0AAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-10T20:38:55.608Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

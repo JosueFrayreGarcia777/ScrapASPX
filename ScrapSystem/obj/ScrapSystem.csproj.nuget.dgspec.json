@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\josue\\OneDrive\\Desktop\\ScrapSystem\\ScrapASPX\\ScrapSystem\\ScrapSystem.csproj": {}
+    "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\josue\\OneDrive\\Desktop\\ScrapSystem\\ScrapASPX\\ScrapSystem\\ScrapSystem.csproj": {
+    "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\josue\\OneDrive\\Desktop\\ScrapSystem\\ScrapASPX\\ScrapSystem\\ScrapSystem.csproj",
+        "projectUniqueName": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem.csproj",
         "projectName": "ScrapSystem",
-        "projectPath": "C:\\Users\\josue\\OneDrive\\Desktop\\ScrapSystem\\ScrapASPX\\ScrapSystem\\ScrapSystem.csproj",
-        "packagesPath": "C:\\Users\\josue\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\josue\\OneDrive\\Desktop\\ScrapSystem\\ScrapASPX\\ScrapSystem\\obj\\",
+        "projectPath": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\ScrapSystem.csproj",
+        "packagesPath": "C:\\Users\\MXJOFRA\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\MXJOFRA\\OneDrive - zf-lifetec\\Desktop\\ASPX\\ScrapSystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\josue\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MXJOFRA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

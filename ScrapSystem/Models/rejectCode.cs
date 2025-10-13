@@ -1,6 +1,6 @@
 ﻿namespace ScrapSystem.Models
 {
-    public class rejecCode
+    public class rejectCode
     {
         public string RejectID { get; set; } = string.Empty;
         public string trwNumber { get; set; } = string.Empty;

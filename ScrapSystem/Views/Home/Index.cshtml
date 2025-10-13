@@ -2,41 +2,51 @@
     ViewData["Title"] = "Home Page";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.ConnectionMessage))
+{
+    <div class="alert @(ViewBag.SearchResult != null ? "alert-success" : "alert-warning") mb-3">
+        @ViewBag.ConnectionMessage
+    </div>    
+
+}
+
 <div class="text-center g-3 align-items-center">
-    <button>
+    <button class="btn-primary">
         Registrar Bitacora
     </button>
-    <button>
+    <button class="btn-primary">
         Editar Bitacora
     </button>
 </div>
     <form class="form-text" action="/" method="post">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-
-                    <th class="w-auto">Turno</th>
-                    <th class="">Linea</th>
-                    <th class="w-25">TRWNumber</th>
-                    <th class="w-50">Componentes</th>
-                    <th class="w-25">Defecto</th>
-                    <th class="w-auto">Cantidad</th>
-                    <th class="w-auto">Boleta Folio</th>
-                </tr>
-            </thead>
-            <tbody>
-            @for (int row = 1; row <= 25; row++)
-                {
-                <tr>
-                    @for (int col = 1; col <= 7; col++)
-                    {
-                        <td>
-                            <input type="text" name="@($"cell_{row}")" class="form-control" />
-                        </td>                       
-                    }
-                </tr>
-                }
-        </tbody>
-        </table>
+        <div class="mb-3">
+            <label for="trwNumber" class="form-label">Escanea etiqueta de rechazo</label>
+            <div class="d-flex align-items-center gap-3">
+                <input type="text" class="form-control form-control-sm w-25" id="rejectCode" />
+                <button class=" btn-primary">Buscar</button>
+            </div>
+        </div>
+           
+        <div class="row mb-3">
+            <label for="trwNumber" class="col-auto form-label">TRWNumber</label>
+            <div class="col-2">
+                <input class="form-control" id="trwNumber" type="text"/>
+            </div>
+            <label class="form-label col-auto">Linea</label>
+            <div class="col-2">
+                <input class="form-control" id="line" type="text" />
+            </div>
+            <label class="form-label col-auto">Turno</label>
+            <div class="col-1">
+                <input class="form-control" id="turno" type="text" />
+            </div>
+            <label class="form-label col-auto">Defecto</label>
+            <div class="col-3"> 
+                <input type="text" class="form-control" id="defect"/>
+            </div>
+        </div>
     </form>
+
+
+
 

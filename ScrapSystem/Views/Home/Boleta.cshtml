@@ -1,0 +1,137 @@
+﻿@model ScrapSystem.Models.BoletaDetalle
+@{
+    ViewData["Title"] = "Boleta de Folio";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-3 fw-bold text-primary">BOLETA</h1>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div class="alert @(Model != null ? "alert-success" : "alert-warning") mb-3">
+        @ViewBag.Mensaje
+    </div>
+}
+
+<!-- Formulario de búsqueda -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form asp-controller="Home" asp-action="Boleta" method="post">
+            <div class="row align-items-end">
+                <div class="col-md-8">
+                    <label for="folioID" class="form-label">Ingrese el Número de Folio:</label>
+                    <input type="text" class="form-control form-control-lg" id="folioID" name="folioID" 
+                           value="@ViewBag.FolioID" placeholder="Ej: 15" autofocus>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        <i class="bi bi-search"></i> Buscar Folio
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <!-- Información del Folio -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📋 Folio @Model.FolioID - @Model.Usuario - @Model.Estado</h4>
+        </div>
+    </div>
+
+    <!-- Tabla Principal Simplificada -->
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>TRW NUMBER</th>
+                        <th>LÍNEA</th>
+                        <th>TURNO</th>
+                        <th>DEFECTO</th>
+                        <th>MATERIALES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.PiezasRechazadas.Any())
+                    {
+                        @foreach (var pieza in Model.PiezasRechazadas)
+                        {
+                            @if (pieza.EsCompleta)
+                            {
+                                <!-- Pieza completa (todos los componentes presentes) -->
+                                <tr>
+                                    <td>@pieza.TRWNumber</td>
+                                    <td>@pieza.Line</td>
+                                    <td>@pieza.Turno</td>
+                                    <td>@pieza.Defect</td>
+                                    <td class="table-success"><strong>PIEZA TERMINADA</strong></td>
+                                </tr>
+                            }
+                            else if (pieza.Componentes.Any())
+                            {
+                                <!-- Primera fila de la pieza con el primer material -->
+                                var primerComponente = pieza.Componentes.First();
+                                <tr>
+                                    <td rowspan="@pieza.Componentes.Count">@pieza.TRWNumber</td>
+                                    <td rowspan="@pieza.Componentes.Count">@pieza.Line</td>
+                                    <td rowspan="@pieza.Componentes.Count">@pieza.Turno</td>
+                                    <td rowspan="@pieza.Componentes.Count">@pieza.Defect</td>
+                                    <td>@primerComponente.MaterialDescription</td>
+                                </tr>
+                                
+                                <!-- Resto de materiales de la pieza -->
+                                @foreach (var componente in pieza.Componentes.Skip(1))
+                                {
+                                    <tr>
+                                        <td>@componente.MaterialDescription</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <!-- Pieza sin componentes registrados (no necesariamente terminada) -->
+                                <tr>
+                                    <td>@pieza.TRWNumber</td>
+                                    <td>@pieza.Line</td>
+                                    <td>@pieza.Turno</td>
+                                    <td>@pieza.Defect</td>
+                                    <td class="table-warning"><strong>SIN COMPONENTES</strong></td>
+                                </tr>
+                            }
+                        }
+                    }
+
+                    @if (Model.ComponentesSueltos.Any())
+                    {
+                        <!-- Separador visual -->
+                        <tr class="table-secondary">
+                            <td colspan="5" class="text-center"><strong>═══ COMPONENTES SUELTOS ═══</strong></td>
+                        </tr>
+                        
+                        <!-- Componentes sueltos con cantidad -->
+                        @foreach (var componente in Model.ComponentesSueltos)
+                        {
+                            <tr class="table-info">
+                                <td colspan="4" class="text-center"><strong>COMPONENTE SUELTO</strong></td>
+                                <td>@componente.MaterialDescription <strong>(Cantidad: @componente.Cantidad)</strong></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @if (!Model.PiezasRechazadas.Any() && !Model.ComponentesSueltos.Any())
+    {
+        <div class="alert alert-info text-center">
+            <h4>📋 Este folio no tiene registros</h4>
+            <p>No se encontraron piezas rechazadas ni componentes sueltos para este folio.</p>
+        </div>
+    }
+}

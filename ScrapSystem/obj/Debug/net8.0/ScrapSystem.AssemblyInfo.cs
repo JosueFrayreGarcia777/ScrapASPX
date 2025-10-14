@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ScrapSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94024c3b6380f840efec15d469b58f066aed0585")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c0bf8d718aa4818a4588f10224453fe32601600")]
 [assembly: System.Reflection.AssemblyProductAttribute("ScrapSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ScrapSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,15 @@
+﻿namespace ScrapSystem.Models
+{
+    public class PiezaRechazadaDetalle
+    {
+        public int RechazadoID { get; set; }
+        public string RejectCode { get; set; } = string.Empty;
+        public string TRWNumber { get; set; } = string.Empty;
+        public string Line { get; set; } = string.Empty;
+        public string Turno { get; set; } = string.Empty;
+        public string Defect { get; set; } = string.Empty;
+        public DateTime FechaRegistro { get; set; }
+        public List<ComponenteRechazadoDetalle> Componentes { get; set; } = [];
+        public bool EsCompleta { get; set; } = false; // Nueva propiedad
+    }
+}

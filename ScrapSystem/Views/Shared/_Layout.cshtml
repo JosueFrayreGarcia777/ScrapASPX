@@ -19,17 +19,24 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+           
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Bitacora</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Boleta">Boleta</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Boleta</a>
-                        </li>
-                       <ul class="navbar-nav ms-auto">
-                           <li class="nav-item">
-                               <a class ="nav-item nav-link"href="#">User</a> 
-                           </li>
-                       </ul>
+                    </ul>
+                    <!-- AGREGAR ESTA SECCIÓN -->
+                    <ul class="navbar-nav ms-auto">
+                        @if (Context.Session.GetString("UsuarioNombre") != null)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    @Context.Session.GetString("UsuarioNombre") (@Context.Session.GetString("UsuarioRol"))
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Login" asp-action="Logout">Cerrar Sesión</a></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -15,22 +15,62 @@
     </div>
 
 }
+@if (!string.IsNullOrEmpty(ViewBag.RegistroMessage))
+{
+    <div class="alert alert-success mb-3">
+        @ViewBag.RegistroMessage
+    </div>
+}
 
-<div class="text-center g-3 align-items-center">
-    <button class="btn-primary">
-        Registrar Bitacora
-    </button>
-    <button class="btn-primary">
-        Editar Bitacora
-    </button>
+@if (ViewBag.BOMResults != null)
+{
+    
+    var bomResults = (List<ScrapSystem.Models.BOM>)ViewBag.BOMResults;
+    if (bomResults.Any())
+    {
+        
+          
+    }
+}
+
+<div class="text-center g-3 align-items-center mb-3">
+   @if (ViewBag.FolioActivo == null)
+    {
+        <form asp-controller="Home" asp-action="IniciarRegistro" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-success btn-lg">
+                Iniciar Registro 
+            </button>
+        </form>
+        
+        <div class="alert alert-warning mt-3">
+            <strong>⚠️ Debe iniciar un registro antes de escanear piezas</strong>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <strong>📋 Folio Activo: @ViewBag.FolioActivo</strong>
+        </div>
+        <form asp-controller="Home" asp-action="FinalizarRegistro" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-lg">
+                Finalizar Registro
+            </button>
+        </form>
+    }
 </div>
-    <form asp-controller="Home" asp-action="Index" class="form-text"  method="post">
+
+<!-- Solo mostrar formulario si hay folio activo -->
+@if (ViewBag.FolioActivo != null)
+{
+    <form asp-controller="Home" asp-action="Index" class="form-text" method="post">
         <div class="mb-3">
             <label for="trwNumber" class="form-label">Escanea etiqueta de rechazo</label>
             <div class="d-flex align-items-center gap-3">
-                <input type="text" class="form-control form-control-sm w-25" id="rejectCode" name="rejectCode"
-                        value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.RejectID ?? "")"
-                        placeholder="Ingrese codigo de rechazo" />
+                <input type="text" class="form-control form-control-sm w-25" 
+                       id="rejectCode" name="rejectCode"
+                       value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.RejectID ?? "")"
+                       placeholder="Ingrese codigo de rechazo" 
+                       autofocus />
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </div>
         </div>
@@ -57,72 +97,242 @@
                 value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.Defect ?? "")" readonly/>
             </div>
         </div>
-    <button type="submit" name="action" value="SearchBOM" class="btn btn-success">Buscar BOM</button>
+        <button type="submit" name="action" value="SearchBOM" class="btn btn-success">Buscar BOM</button>
+        <button type="button" class="btn btn-info ms-2" data-bs-toggle="modal" data-bs-target="#componentesSueltosModal">
+            <i class="bi bi-plus-circle"></i> Agregar Componentes Sueltos
+        </button>
     </form>
-    
-   @* Mostrar resultados de BOM*@
+}
+else
+{
+    <div class="text-center mt-5">
+        <h5 class="text-muted">Inicie un registro para comenzar a escanear piezas</h5>
+    </div>
+}
+
+@* Modificar solo la sección de BOM *@
 @if (ViewBag.BOMResults != null)
 {
-
     var bomResults = (List<ScrapSystem.Models.BOM>)ViewBag.BOMResults;
     if (bomResults.Any())
     {
-       <form asp-controller="Home" asp-action="RegistrarRechazo" method="post">
-           <input type="hidden" name="rejectCode" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.RejectID ?? "")"/>
-           <input type="hidden" name="trwNumber" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.trwNumber ?? "")"/>
-           <input type="hidden" name="line" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.Line ?? "")" />
-           <input type="hidden" name="turno" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.Turno ?? "")" />
-           <input type="hidden" name="defect" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.Defect ?? "")" />
+        @if (!string.IsNullOrEmpty(TempData["MensajeEliminacion"] as string))
+        {
+            <div class="alert alert-success">
+                @TempData["MensajeEliminacion"]
+            </div>
+        }
 
-            <div class=" mt-4">
-                <h4>BILL OF MATERIALS - Selecciona componentes Faltantes a pieza :</h4>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-dark">
+        <div class="mt-4">
+            <h4>BILL OF MATERIALS - Componentes disponibles:</h4>
+            <div class="alert alert-info">
+                <small><strong>Instrucciones:</strong> Los componentes mostrados abajo son los que <strong>SÍ tiene</strong> la pieza. 
+                Presione "Eliminar" en los componentes que <strong>le faltan</strong> a la pieza.</small>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Acción</th>
+                            <th>Numero Material</th>
+                            <th>Descripcion Material</th>
+                            <th>Unidad</th>
+                            <th>Precio Unitario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var bom in bomResults)
+                        {
                             <tr>
-                                <th>Seleccionar</th>
-                                <th>Numero Material</th>
-                                <th>Descripcion Material</th>
-                                <th>Unidad</th>
-                                <th>Precio Unitario</th>
-                                <th>Cantidad</th>
+                                <td>
+                                    <form asp-controller="Home" asp-action="EliminarComponenteBOM" method="post" style="display: inline;">
+                                        <input type="hidden" name="piezaID" value="@bom.PiezaID" />
+                                        <input type="hidden" name="materialID" value="@bom.MaterialID" />
+                                        <input type="hidden" name="rejectCode" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.RejectID ?? "")" />
+                                        <button type="submit" 
+                                                class="btn btn-danger btn-sm" 
+                                                onclick="return confirm('¿Este componente le FALTA a la pieza?')">
+                                            <i class="bi bi-trash"></i> Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>@bom.MaterialNumber</td>
+                                <td>@bom.MaterialDescription</td>
+                                <td>@bom.Unidad</td>
+                                <td>$@bom.PrecioUnitario.ToString("F4")</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @for (int i = 0; i < bomResults.Count; i++)
-                            {
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="componentesSeleccionados[@i].Seleccionado" value="true" class="form-check-input"/>
-                                        <input type="hidden" name="componentesSeleccionados[@i].MaterialID" value="@bomResults[i].MaterialID"/>
-                                        <input type="hidden" name="componentesSeleccionados[@i].MaterialNumber" value="@bomResults[i].MaterialNumber"/>
-                                        <input type="hidden" name="componentesSeleccionados[@i].MaterialDescription" value="@bomResults[i].MaterialDescription"/>
-                                    </td>
-                                    <td>@bomResults[i].MaterialNumber</td>
-                                    <td>@bomResults[i].MaterialDescription</td>
-                                    <td>@bomResults[i].Unidad</td>
-                                    <td>@bomResults[i].PrecioUnitario.ToString("F4")</td>
-                                    <td>
-                                        <input type="number" name="componentesSeleccionados[@i].Cantidad" value="1" min="1" max="100" class="form-control" style="width :80px;" />
-                                    </td>
-                                </tr>    
-                            }
-                        </tbody>
-                    </table>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-3 d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Componentes disponibles: @bomResults.Count</strong>
                 </div>
-                <div class="mt-3 d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>Total de materiales :@bomResults.Count</strong>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn btn-danger btn-lg">Registrar Rechazo</button>
-                    </div>
+                <div>
+                    <form asp-controller="Home" asp-action="LimpiarComponentesEliminados" method="post" style="display: inline;">
+                        <input type="hidden" name="rejectCode" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.RejectID ?? "")" />
+                        <button type="submit" class="btn btn-warning me-2">
+                            <i class="bi bi-arrow-clockwise"></i> Restaurar Todos
+                        </button>
+                    </form>
                 </div>
             </div>
-        </form>
-    
+            
+            <!-- Formulario para registrar la pieza con los componentes que quedaron -->
+            <div class="mt-4 text-center">
+                <form asp-controller="Home" asp-action="RegistrarRechazo" method="post">
+                    <input type="hidden" name="rejectCode" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.RejectID ?? "")"/>
+                    <input type="hidden" name="trwNumber" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.trwNumber ?? "")"/>
+                    <input type="hidden" name="line" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.Line ?? "")" />
+                    <input type="hidden" name="turno" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.Turno ?? "")" />
+                    <input type="hidden" name="defect" value="@((ViewBag.SearchResult as ScrapSystem.Models.rejectCode)?.Defect ?? "")" />
+                    
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="bi bi-check-circle"></i> Registrar Pieza Rechazada
+                    </button>
+                    <div class="mt-2">
+                        <small class="text-muted">
+                            Se registrarán <strong>@bomResults.Count componentes disponibles</strong> en la pieza
+                        </small>
+                    </div>
+                </form>
+            </div>
+        </div>
     }
 }
+
+<!-- Modal para Componentes Sueltos -->
+<div class="modal fade" id="componentesSueltosModal" tabindex="-1" aria-labelledby="componentesSueltosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="componentesSueltosModalLabel">Agregar Componentes Sueltos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="materialNumberFilter" class="form-label">Buscar Material:</label>
+                    <input type="text" class="form-control" id="materialNumberFilter" placeholder="Ingrese número de material">
+                    <button type="button" class="btn btn-primary mt-2" onclick="buscarMaterial()">Buscar</button>
+                </div>
+                
+                <div id="resultadosBusqueda" style="display: none;">
+                    <h6>Resultado:</h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <p><strong>Material:</strong> <span id="materialNumberResult"></span></p>
+                            <p><strong>Descripción:</strong> <span id="materialDescriptionResult"></span></p>
+                            <p><strong>Precio:</strong> $<span id="materialPrecioResult"></span></p>
+                            
+                            <div class="row">
+                                <div class="col-3">
+                                    <label for="cantidadSuelto" class="form-label">Cantidad:</label>
+                                    <input type="number" class="form-control" id="cantidadSuelto" value="1" min="1">
+                                </div>
+                                <div class="col-9 d-flex align-items-end">
+                                    <button type="button" class="btn btn-success" onclick="agregarComponenteSuelto()">
+                                        <i class="bi bi-plus"></i> Agregar al Folio
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="mensajeBusqueda"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let materialEncontrado = null;
+
+function buscarMaterial() {
+    const materialNumber = document.getElementById('materialNumberFilter').value.trim();
+    const mensajeDiv = document.getElementById('mensajeBusqueda');
+    const resultadosDiv = document.getElementById('resultadosBusqueda');
+    
+    if (!materialNumber) {
+        mensajeDiv.innerHTML = '<div class="alert alert-warning">Por favor ingrese un número de material</div>';
+        return;
+    }
+    
+    fetch('/Home/BuscarMaterial', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        },
+        body: JSON.stringify({ materialNumber: materialNumber })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            materialEncontrado = data.material;
+            document.getElementById('materialNumberResult').textContent = data.material.materialNumber;
+            document.getElementById('materialDescriptionResult').textContent = data.material.materialDescription;
+            document.getElementById('materialPrecioResult').textContent = data.material.precio.toFixed(4);
+            
+            resultadosDiv.style.display = 'block';
+            mensajeDiv.innerHTML = '';
+        } else {
+            resultadosDiv.style.display = 'none';
+            mensajeDiv.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';
+            materialEncontrado = null;
+        }
+    })
+    .catch(error => {
+        mensajeDiv.innerHTML = '<div class="alert alert-danger">Error al buscar el material</div>';
+        resultadosDiv.style.display = 'none';
+        materialEncontrado = null;
+    });
+}
+
+function agregarComponenteSuelto() {
+    if (!materialEncontrado) {
+        alert('Debe buscar y seleccionar un material primero');
+        return;
+    }
+    
+    const cantidad = parseInt(document.getElementById('cantidadSuelto').value) || 1;
+    
+    fetch('/Home/AgregarComponenteSuelto', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        },
+        body: JSON.stringify({
+            materialID: materialEncontrado.materialID,
+            cantidad: cantidad
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Componente agregado exitosamente al folio');
+            // Cerrar modal
+            document.querySelector('#componentesSueltosModal .btn-close').click();
+            // Limpiar formulario
+            document.getElementById('materialNumberFilter').value = '';
+            document.getElementById('cantidadSuelto').value = '1';
+            document.getElementById('resultadosBusqueda').style.display = 'none';
+            document.getElementById('mensajeBusqueda').innerHTML = '';
+            materialEncontrado = null;
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        alert('Error al agregar el componente');
+    });
+}
+</script>
+
 
 
 
